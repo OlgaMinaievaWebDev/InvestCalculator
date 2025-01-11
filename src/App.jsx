@@ -10,6 +10,7 @@ function App() {
     expectedReturn: 7,
     duration: 10,
   });
+  const inputValid = userInput.duration >= 1;
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -23,7 +24,8 @@ function App() {
     <>
       <Header />
       <UserInput userInput={userInput} handleInputChange={handleInputChange} />
-      <Results userInput={userInput} />
+      {!inputValid && <p id="error">Duration must be at least 1 year</p>}
+      {inputValid && <Results userInput={userInput} />}
     </>
   );
 }
