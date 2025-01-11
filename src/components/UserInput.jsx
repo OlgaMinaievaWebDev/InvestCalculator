@@ -1,25 +1,44 @@
+import { useState } from "react";
+
 function UserInput() {
+  const [userInput, setUserInput] = useState({
+    initialInvestment: 10000,
+    annualInvestment: 1000,
+    expectedReturn: 7,
+    duration: 10,
+  });
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setUserInput((prevUserInput) => ({
+      ...prevUserInput,
+      [name]: value === "" ? "" : +value, // Allow empty input, otherwise convert to number
+    }));
+  }
+
   return (
     <section id="user-input">
       <div className="input-group">
         <p>
-          <label id="user-input" htmlFor="initial investment">
-            INITIAL INVESTMENT
-          </label>
+          <label htmlFor="initialInvestment">INITIAL INVESTMENT</label>
           <input
-            id="user-input"
+            name="initialInvestment"
+            id="initialInvestment"
             type="number"
+            value={userInput.initialInvestment}
+            onChange={handleInputChange}
             placeholder="Enter amount"
             required
           />
         </p>
         <p>
-          <label id="user-input" htmlFor="annual investment">
-            ANNUAL INVESTMENT
-          </label>
+          <label htmlFor="annualInvestment">ANNUAL INVESTMENT</label>
           <input
-            id="user-input"
+            name="annualInvestment"
+            id="annualInvestment"
             type="number"
+            value={userInput.annualInvestment}
+            onChange={handleInputChange}
             placeholder="Enter amount"
             required
           />
@@ -27,23 +46,25 @@ function UserInput() {
       </div>
       <div className="input-group">
         <p>
-          <label id="user-input" htmlFor="return">
-            EXPECTED RETURN
-          </label>
+          <label htmlFor="expectedReturn">EXPECTED RETURN (%)</label>
           <input
-            id="user-input"
+            name="expectedReturn"
+            id="expectedReturn"
             type="number"
+            value={userInput.expectedReturn}
+            onChange={handleInputChange}
             placeholder="Enter percentage"
             required
           />
         </p>
         <p>
-          <label id="user-input" htmlFor="duration">
-            DURATION
-          </label>
+          <label htmlFor="duration">DURATION (Years)</label>
           <input
-            id="user-input"
+            name="duration"
+            id="duration"
             type="number"
+            value={userInput.duration}
+            onChange={handleInputChange}
             placeholder="Enter years"
             required
           />
