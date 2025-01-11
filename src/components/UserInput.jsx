@@ -1,21 +1,4 @@
-import { useState } from "react";
-
-function UserInput() {
-  const [userInput, setUserInput] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 1000,
-    expectedReturn: 7,
-    duration: 10,
-  });
-
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setUserInput((prevUserInput) => ({
-      ...prevUserInput,
-      [name]: value === "" ? "" : +value, // Allow empty input, otherwise convert to number
-    }));
-  }
-
+function UserInput({ handleInputChange, userInput }) {
   return (
     <section id="user-input">
       <div className="input-group">
